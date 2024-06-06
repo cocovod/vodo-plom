@@ -35,5 +35,5 @@ jobs:
             echo "NEXT_PUBLIC_SERVER_URL= ${{ secrets.NEXT_PUBLIC_SERVER_URL }}" > client/.env
             echo "NEXT_PUBLIC_GEOAPI_KEY= ${{ secrets.NEXT_PUBLIC_GEOAPI_KEY }}" >> client/.env
 
-            docker compose build
-            docker compose up -d
+            docker-compose build
+            docker-compose up -d
