@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_SERVER_IP }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd ./vodo-plom
+            docker-compose down
+            git restore .
+            git pull
+
+            # server            
+            echo "SQL_DIALECT= ${{ secrets.SQL_DIALECT }}" > server/.env
+            echo "SQL_LOGGING= ${{ secrets.SQL_LOGGING }}" >> server/.env
+            echo "DATABASE_HOST= ${{ secrets.DATABASE_HOST }}" >> server/.env
+            echo "DATABASE_PORT= ${{ secrets.DATABASE_PORT }}" >> server/.env
+            echo "DATABASE_USER= ${{ secrets.DATABASE_USER }}" >> server/.env
+            echo "DATABASE_PASSWORD= ${{ secrets.DATABASE_PASSWORD }}" >> server/.env
+            echo "DATABASE_NAME= ${{ secrets.DATABASE_NAME }}" >> server/.env
+
+            # client
+            echo "NEXT_PUBLIC_SERVER_URL= ${{ secrets.NEXT_PUBLIC_SERVER_URL }}" > client/.env
+            echo "NEXT_PUBLIC_GEOAPI_KEY= ${{ secrets.NEXT_PUBLIC_GEOAPI_KEY }}" >> client/.env
+
+            docker compose build
+            docker compose up -d
