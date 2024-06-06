@@ -52,6 +52,11 @@ export class UsersController {
 		return req.user;
 	}
 
+	@Get('/ping')
+	ping() {
+		return { msg: 'ALIVE' };
+	}
+
 	@ApiOkResponse({ type: LogoutUserResponse })
 	@Get('/logout')
 	logout(@Request() req) {
