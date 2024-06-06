@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "vodoplom_hairshout",
+    "password": "e49bb4923fa16915a751aad4c09cccf49cbb82d4",
+    "database": "vodoplom_hairshout",
+    "host": "yy1.h.filess.io",
+    "dialect": "mysql",
+    "port": 3305
+  },
+  "test": {
+    "username": "vodoplom_hairshout",
+    "password": "e49bb4923fa16915a751aad4c09cccf49cbb82d4",
+    "database": "vodoplom_hairshout",
+    "host": "yy1.h.filess.io",
+    "dialect": "mysql",
+    "port": 3305
+  },
+  "production": {
+    "username": "vodoplom_hairshout",
+    "password": "e49bb4923fa16915a751aad4c09cccf49cbb82d4",
+    "database": "vodoplom_hairshout",
+    "host": "yy1.h.filess.io",
+    "dialect": "mysql",
+    "port": 3305
+  }
+}
