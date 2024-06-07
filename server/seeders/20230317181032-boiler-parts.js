@@ -35,26 +35,56 @@ const patsImages = [
 	'https://st25.stpulscen.ru/images/product/353/654/473_big.jpg',
 ];
 
+const name = [
+	'Вентилятор',
+	'Комплектующие к радиаторам',
+	'Метизы',
+	'Металл',
+	'Арматура',
+	'Оголовки для скважин',
+	'Комплектующие к гидроаккумуляторам, бакам',
+	'Комплектующие к мотопомпам',
+	'Бочата',
+	'Отвод крутоизогнутый',
+];
+
+const description = [
+	'Фитинги для канализации – это комплектующие элементы для различных соединений труб.',
+	'простая стыковка; выполнение разнообразных соединений; небольшая стоимость.',
+	'Трубы из полиэтилена низкого давления (ПНД) применяются для транспортировки холодной воды (до 40°С)',
+	'Полимерно-песчаные люки используются для всех видов инженерных сетей, сетей водоснабжения и канализации.',
+];
+
+const compatibility = [
+	'Трубы',
+	'Фитинг',
+	'нет',
+	'Арматура',
+	'Изоляционный материал',
+	'Хомуты',
+	'Водоснабжение',
+];
+
+const getRandomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		return queryInterface.bulkInsert(
 			'BoilerParts',
 			[...Array(100)].map(() => ({
-				boiler_manufacturer:
-					boilerManufacturers[Math.floor(Math.random() * boilerManufacturers.length)],
-				parts_manufacturer:
-					partsManufacturers[Math.floor(Math.random() * partsManufacturers.length)],
+				boiler_manufacturer: getRandomValue(boilerManufacturers),
+				parts_manufacturer: getRandomValue(partsManufacturers),
 				price: faker.string.numeric(4),
-				name: faker.lorem.sentence(2),
-				description: faker.lorem.sentence(10),
+				name: getRandomValue(name),
+				description: getRandomValue(description),
 				images: JSON.stringify(patsImages.sort(() => Math.random() - 0.5).slice(0, 2)),
 				vendor_code: faker.internet.password(),
 				in_stock: faker.string.numeric(1),
 				bestseller: faker.datatype.boolean(),
 				new: faker.datatype.boolean(),
 				popularity: faker.string.numeric(3),
-				compatibility: faker.lorem.sentence(7),
+				compatibility: [...Array(3)].map(() => getRandomValue(compatibility)).join(', '),
 				createdAt: new Date(),
 				updatedAt: new Date(),
 			})),
