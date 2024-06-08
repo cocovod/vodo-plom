@@ -1,4 +1,3 @@
 vodopolimer.ru {
-    tls internal
     reverse_proxy client:8080
 }
