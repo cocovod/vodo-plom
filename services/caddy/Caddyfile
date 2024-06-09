@@ -2,6 +2,6 @@ vodopolimer.ru {
     reverse_proxy 194.87.99.171:8080
 }
 
-vodopolimer.ru:3000 {
+vodopolimer.ru:3001 {
     reverse_proxy 194.87.99.171:3000
 }
